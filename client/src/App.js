@@ -10,6 +10,8 @@ import { CssBaseline, MuiThemeProvider } from "@material-ui/core";
 import theme from "./theme";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "react-placeholder/lib/reactPlaceholder.css";
+
 import BookmarksPage from "./routes/bookmarks/BookmarksPage";
 
 const client = new QueryClient({
@@ -34,7 +36,7 @@ function App() {
               <NotFoundPage path="*" />
             </Router>
           </Layout>
-          <ToastContainer />
+          <ToastContainer autoClose={1000} hideProgressBar />
         </MuiThemeProvider>
       </AuthContextProvider>
     </QueryClientProvider>

@@ -5,7 +5,8 @@ import AxiosManager from "../../managers/AxiosManager";
 import _flatten from "lodash/flatten";
 import handleLoadingAndError from "../../components/handleLoadingAndError";
 import InfiniteScroll from "react-infinite-scroller";
-import CharacterList from "./CharacterList";
+import CharacterList from "../../components/CharacterList/CharacterList";
+import CharacterListPlaceholder from "../../components/CharacterList/CharacterListPlaceholder";
 const Homepage = () => {
   const resp = useInfiniteQuery(
     "characters",
@@ -18,11 +19,15 @@ const Homepage = () => {
     }
   );
   return (
-    handleLoadingAndError(resp) || (
+    handleLoadingAndError(resp, {
+      loadingPlaceholder: <CharacterListPlaceholder />,
+    }) || (
       <Box>
-        <Typography component="h1" variant="h6" gutterBottom>
-          Rick and Morty characters
-        </Typography>
+        <Box mb={2}>
+          <Typography component="h1" variant="h6" gutterBottom>
+            Rick and Morty characters
+          </Typography>
+        </Box>
         <InfiniteScroll
           loadMore={resp.fetchNextPage}
           hasMore={resp.hasNextPage}

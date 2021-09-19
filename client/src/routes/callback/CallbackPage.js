@@ -9,8 +9,7 @@ import {
 const CallbackPage = () => {
   const location = useLocation();
   const query = parse(location.search);
-  const token = JSON.parse(atob(query.data));
-  LocalStorageManager.set(LS_AUTH_KEY, token);
+  LocalStorageManager.set(LS_AUTH_KEY, { id_token: query.id_token });
   return <Redirect to="/" noThrow />;
 };
 

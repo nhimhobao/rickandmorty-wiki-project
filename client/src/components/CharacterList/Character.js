@@ -5,41 +5,36 @@ import {
   CardHeader,
   Divider,
   IconButton,
-  Link,
   Typography,
 } from "@material-ui/core";
 import { Bookmark } from "@material-ui/icons";
 import React from "react";
-import { useAuth } from "../../components/AuthContext";
+import { useAuth } from "../AuthContext";
 import { toast } from "react-toastify";
-import { loginUrl } from "../../components/urls";
 import AxiosManager from "../../managers/AxiosManager";
 import { useMutation } from "react-query";
+import useCheckAuth from "../AuthContext/useCheckAuth";
 
 export const BookmarkButton = ({ characterId }) => {
-  const { user, isLoading, error } = useAuth();
-  const { mutateAsync } = useMutation("bookmarks", () => {
-    const client = AxiosManager.createAuthClient();
-    return client.post("/likes", { characterId });
-  });
-  const onClick = () => {
-    if (!user) {
-      return toast.warn(
-        <Typography variant="body2">
-          You must{" "}
-          <Link component="a" href={loginUrl}>
-            login
-          </Link>{" "}
-          to perform this action
-        </Typography>
-      );
+  const { withAuth } = useCheckAuth();
+  const { isLoading, error } = useAuth();
+  const { mutateAsync } = useMutation(
+    "bookmarks",
+    () => {
+      const client = AxiosManager.createAuthClient();
+      return client.post("/likes", { characterId });
+    },
+    {
+      onSuccess: () => toast.success("Bookmarked"),
     }
+  );
+  const onClick = () => {
     return mutateAsync({});
   };
   return (
     <IconButton
       aria-label="settings"
-      onClick={onClick}
+      onClick={withAuth(onClick)}
       disabled={isLoading || error}
     >
       <Bookmark color="disabled" />
@@ -62,7 +57,7 @@ export const Character = ({ character }) => {
           </Typography>
         }
         action={<BookmarkButton characterId={character.id} />}
-      ></CardHeader>
+      />
       <Divider />
       <CardContent>
         <Typography variant="subtitle2">

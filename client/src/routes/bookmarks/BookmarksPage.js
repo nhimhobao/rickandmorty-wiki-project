@@ -1,10 +1,11 @@
 import React from "react";
-import CharacterList from "../home/CharacterList";
+import CharacterList from "../../components/CharacterList/CharacterList";
 import { useQuery } from "react-query";
 import AxiosManager from "../../managers/AxiosManager";
 import handleLoadingAndError from "../../components/handleLoadingAndError";
 import { Typography } from "@material-ui/core";
 import { withAuth } from "../../components/AuthContext/withAuth";
+import CharacterListPlaceholder from "../../components/CharacterList/CharacterListPlaceholder";
 
 const BookmarksPage = () => {
   const resp = useQuery(["bookmarks"], () => {
@@ -13,7 +14,9 @@ const BookmarksPage = () => {
   });
 
   return (
-    handleLoadingAndError(resp) || (
+    handleLoadingAndError(resp, {
+      loadingPlaceholder: <CharacterListPlaceholder />,
+    }) || (
       <div>
         <Typography component="h1" variant="h6" gutterBottom>
           My bookmarks

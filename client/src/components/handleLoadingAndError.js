@@ -2,12 +2,15 @@ import { Box, CircularProgress, Container } from "@material-ui/core";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import React from "react";
 
-function handleLoadingAndError(resp) {
+function handleLoadingAndError(resp, options) {
+  const { loadingPlaceholder } = options || {};
   if (resp.isLoading)
     return (
-      <Box display="flex" justifyContent="space-around">
-        <CircularProgress />
-      </Box>
+      loadingPlaceholder || (
+        <Box display="flex" justifyContent="space-around">
+          <CircularProgress />
+        </Box>
+      )
     );
   if (resp.error)
     return (

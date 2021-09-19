@@ -29,13 +29,8 @@ router.get("/", async (req, res) => {
         redirect_uri: authRedirectUri,
       }),
     };
-
     const response = await axios(options);
-    console.log(response.data);
-    const base64Data = Buffer.from(JSON.stringify(response.data)).toString(
-      "base64"
-    );
-    res.redirect(`${clientUrlCallback}?success=true&data=${base64Data}`);
+    res.redirect(`${clientUrlCallback}?id_token=${response.data.id_token}`);
   } catch (error) {
     res.send(error.response.data);
   }
