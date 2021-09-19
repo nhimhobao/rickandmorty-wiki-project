@@ -1,1 +1,1 @@
-web: cd server && node build/app.js
+web: cd server && yarn prod
