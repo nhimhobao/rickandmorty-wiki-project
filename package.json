@@ -13,6 +13,7 @@
   "scripts": {
     "client": "yarn workspace client start",
     "server": "yarn workspace server start",
-    "start": "npm-run-all --parallel client server"
+    "start": "npm-run-all --parallel client server",
+    "heroku-postbuild": "yarn workspace server build"
   }
 }
