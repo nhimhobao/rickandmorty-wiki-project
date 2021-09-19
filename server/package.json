@@ -14,7 +14,7 @@
     "jwks-rsa": "^2.0.4",
     "morgan": "^1.10.0",
     "nedb-promises": "^5.0.0",
-    "bluebird": "^3.7.2",
+    "bluebird": "^3.7.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.8",
