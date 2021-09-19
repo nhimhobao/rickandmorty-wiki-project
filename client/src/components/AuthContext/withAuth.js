@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import handleLoadingAndError from "../handleLoadingAndError";
 import { Container, Link } from "@material-ui/core";
 import { Alert, AlertTitle } from "@material-ui/lab";

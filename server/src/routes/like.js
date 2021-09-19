@@ -19,7 +19,6 @@ route.get("/:characterId", checkJwt, async (req, res) => {
     email: req.user.email,
     characterId,
   });
-  console.log(characterId, isLiked);
   return res.json({ isLiked });
 });
 

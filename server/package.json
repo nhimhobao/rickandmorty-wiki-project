@@ -30,9 +30,10 @@
     "clean": "rimraf build",
     "transpile": "babel src --out-dir build",
     "build": "npm-run-all clean transpile",
-    "server": "node build/app.js",
-    "dev": "npm-run-all build server",
-    "start": "nodemon"
+    "serve": "node build/app.js",
+    "dev": "npm-run-all build serve",
+    "start": "nodemon",
+    "prod": "npm-run-all build serve"
   },
   "nodemonConfig": {
     "exec": "yarn dev",
