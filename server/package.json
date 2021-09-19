@@ -6,15 +6,16 @@
   "dependencies": {
     "@babel/runtime": "^7.15.3",
     "axios": "^0.21.1",
+    "bluebird": "^3.7.2",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-jwt": "^6.1.0",
+    "helmet": "^4.6.0",
     "jwks-rsa": "^2.0.4",
     "morgan": "^1.10.0",
-    "nedb-promises": "^5.0.0",
-    "bluebird": "^3.7.2"
+    "nedb-promises": "^5.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.8",
@@ -36,7 +37,9 @@
   },
   "nodemonConfig": {
     "exec": "yarn dev",
-    "watch": ["src"],
+    "watch": [
+      "src"
+    ],
     "ignore": [
       "build"
     ]

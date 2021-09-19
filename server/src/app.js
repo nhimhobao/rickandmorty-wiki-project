@@ -9,8 +9,10 @@ import logoutRoute from "./routes/logout";
 import likeRoute from "./routes/like";
 import charactersRoute from "./routes/charactersRoute";
 import syncDbRoute from "./routes/syncDb";
+import helmet from "helmet";
 
 const app = express();
+app.use(helmet());
 app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
