@@ -14,7 +14,7 @@ import { useAuth } from "../../components/AuthContext";
 import { toast } from "react-toastify";
 import { loginUrl } from "../../components/urls";
 import AxiosManager from "../../managers/AxiosManager";
-import { useMutation, useQuery } from "react-query";
+import { useMutation } from "react-query";
 
 export const BookmarkButton = ({ characterId }) => {
   const { user, isLoading, error } = useAuth();
@@ -22,17 +22,6 @@ export const BookmarkButton = ({ characterId }) => {
     const client = AxiosManager.createAuthClient();
     return client.post("/likes", { characterId });
   });
-  const resp = useQuery(
-    ["like", characterId],
-    () => {
-      const client = AxiosManager.createAuthClient();
-      return client.get("/likes/" + characterId);
-    },
-    {
-      enabled: !isLoading && !error && Boolean(user),
-    }
-  );
-  const isLiked = resp.data?.data.isLiked;
   const onClick = () => {
     if (!user) {
       return toast.warn(
@@ -53,7 +42,7 @@ export const BookmarkButton = ({ characterId }) => {
       onClick={onClick}
       disabled={isLoading || error}
     >
-      <Bookmark color={isLiked ? "primary" : "disabled"} />
+      <Bookmark color="disabled" />
     </IconButton>
   );
 };
