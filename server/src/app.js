@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import logger from "morgan";
 import cors from "cors";
 import callbackRoute from "./routes/callback";
+import callbackKeyCloakRoute from "./routes/callbackKeyCloak";
 import profileRoute from "./routes/profile";
 import logoutRoute from "./routes/logout";
 import likeRoute from "./routes/like";
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use("/callback", callbackRoute);
+app.use("/callback-keycloak", callbackKeyCloakRoute);
 app.use("/profile", profileRoute);
 
 app.use("/logout", logoutRoute);

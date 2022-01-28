@@ -4,43 +4,11 @@ import {
   CardContent,
   CardHeader,
   Divider,
-  IconButton,
   Typography,
 } from "@material-ui/core";
-import { Bookmark } from "@material-ui/icons";
 import React from "react";
-import { useAuth } from "../AuthContext";
-import { toast } from "react-toastify";
-import AxiosManager from "../../managers/AxiosManager";
-import { useMutation } from "react-query";
-import useCheckAuth from "../AuthContext/useCheckAuth";
+import BookmarkButton from "./BookmarkButton";
 
-export const BookmarkButton = ({ characterId }) => {
-  const { withAuth } = useCheckAuth();
-  const { isLoading, error } = useAuth();
-  const { mutateAsync } = useMutation(
-    "bookmarks",
-    () => {
-      const client = AxiosManager.createAuthClient();
-      return client.post("/likes", { characterId });
-    },
-    {
-      onSuccess: () => toast.success("Bookmarked"),
-    }
-  );
-  const onClick = () => {
-    return mutateAsync({});
-  };
-  return (
-    <IconButton
-      aria-label="settings"
-      onClick={withAuth(onClick)}
-      disabled={isLoading || error}
-    >
-      <Bookmark color="disabled" />
-    </IconButton>
-  );
-};
 export const Character = ({ character }) => {
   return (
     <Card variant="outlined">

@@ -2,6 +2,7 @@ import { Router } from "express";
 const route = Router();
 import * as likeController from "../controllers/likeController";
 import { checkJwt } from "../middlewares/checkJwt";
+import { checkJwtKeyCloak } from "../middlewares/checkJwtKeyCloak";
 
 route.post("/", checkJwt, async (req, res) => {
   const { characterId } = req.body;
@@ -12,7 +13,7 @@ route.post("/", checkJwt, async (req, res) => {
   });
   res.json({ success: true });
 });
-route.get("/mine", checkJwt, async (req, res) => {
+route.get("/mine", checkJwtKeyCloak, async (req, res) => {
   const likes = await likeController.getLikesByUser({
     email: req.user.email || req.user.nickname,
   });

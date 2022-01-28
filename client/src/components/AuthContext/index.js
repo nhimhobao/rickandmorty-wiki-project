@@ -4,12 +4,14 @@ import axios from "axios";
 import {
   LocalStorageManager,
   LS_AUTH_KEY,
+  LS_PROFILE,
 } from "../../managers/LocalStorageManager";
 import { apiBaseUrl } from "../../config";
 
 export const AuthContext = React.createContext({});
 
 const AuthContextProvider = (props) => {
+  const cachedUser = LocalStorageManager.get(LS_PROFILE);
   const { data, error, isLoading } = useQuery(
     ["profile"],
     () => {
@@ -24,8 +26,15 @@ const AuthContextProvider = (props) => {
       return client.get("/profile").then((resp) => resp.data.user);
     },
     {
+      enabled: !cachedUser,
       retryOnMount: false,
       retry: false,
+      onSuccess: (data) => {
+        if (data) {
+          const expireAt = data.exp;
+          LocalStorageManager.set(LS_PROFILE, data, { expireAt });
+        }
+      },
       onError: (error) => {
         if (error.response && error.response.status === 401) {
           LocalStorageManager.remove(LS_AUTH_KEY);
@@ -36,7 +45,7 @@ const AuthContextProvider = (props) => {
     }
   );
   const context = {
-    user: isLoading || error ? null : data,
+    user: cachedUser || (isLoading || error ? null : data),
     isLoading,
     error,
   };

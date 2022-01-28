@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "react-placeholder/lib/reactPlaceholder.css";
 
 import BookmarksPage from "./routes/bookmarks/BookmarksPage";
+import CallbackKeycloakPage from "./routes/callback-keycloak/CallbackKeycloakPage";
 
 const client = new QueryClient({
   defaultOptions: {
@@ -31,6 +32,7 @@ function App() {
             <Router>
               <HomePage path="/" />
               <CallbackPage path="callback" />
+              <CallbackKeycloakPage path="callback-keycloak" />
               <LogoutPage path="logout" />
               <BookmarksPage path="bookmarks" />
               <NotFoundPage path="*" />

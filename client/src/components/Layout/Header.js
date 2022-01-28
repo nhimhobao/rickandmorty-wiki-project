@@ -4,6 +4,7 @@ import LoginButton from "./LoginButton";
 import banner from "./banner.svg";
 import { Link } from "@reach/router";
 import { bookmarksUrl } from "../urls";
+import KeyCloakLoginButton from "./KeyCloakLoginButton";
 const Headers = () => {
   return (
     <AppBar color="inherit" position="absolute" variant="outlined">
@@ -22,7 +23,7 @@ const Headers = () => {
             Bookmarks
           </Button>
           <Box flexGrow={1} />
-
+          <KeyCloakLoginButton />
           <LoginButton />
         </Toolbar>
       </Container>
